@@ -5,7 +5,7 @@ string mensagemDeBoasVindas = "Boas vindas ao Screen Sound";
 //List<string> listaDasBandas = new List<string> { "U2", "The Beatles", "Calypso" }; 
 
 Dictionary<string, List<int>> bandasRegistradas = new Dictionary<string, List<int>>();
-bandasRegistradas.Add("Link Park", new List<int>  { 10, 8, 3 });
+bandasRegistradas.Add("Linkin Park", new List<int>  { 10, 8, 3 });
 bandasRegistradas.Add("The Beatles", new List<int>());
 
 void ExibirLogo()
@@ -44,7 +44,7 @@ void ExibirOpcoesDoMenu()
             MostrarBandasRegistradas();
             break;
         case 3:
-            Console.WriteLine("Teste");
+            avaliarUmaBanda();
             break;
         case 4:
             Console.WriteLine("Você escolheu a opção " + opcaoEscolhidaNumerica);
@@ -109,14 +109,20 @@ void avaliarUmaBanda()
     Console.Clear();
     ExibirTitulosDasOpcoes("Avaliar Banda");
     Console.Write("Digite o nome da banda: ");
-    string bandaEscolhida = Console.ReadLine()!;
-    if (bandaEscolhida.ContainsKey(bandaEscolhida))
+    string bandaEscolhida =Console.ReadLine()!;
+    if (bandasRegistradas.ContainsKey(bandaEscolhida))
     {
-
+        Console.WriteLine($"Qual nota deseja aplicar para a banda {bandaEscolhida}?");
+        int nota = int.Parse(Console.ReadLine()!);
+        bandasRegistradas[bandaEscolhida].Add(nota);
+        Console.WriteLine($"\nNota {nota} aplicada para banda {bandaEscolhida}!");
+        Thread.Sleep(4000);
+        Console.Clear();
+        ExibirOpcoesDoMenu();
     }
     else
     {
-        Console.WriteLine("Banda não existe");
+        Console.WriteLine($"\nA banda {bandaEscolhida} não foi localizada.");
         Console.WriteLine("Digite qualquer tecla para voltar");
         Console.ReadKey();
         ExibirOpcoesDoMenu();
