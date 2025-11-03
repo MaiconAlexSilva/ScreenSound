@@ -47,7 +47,7 @@ void ExibirOpcoesDoMenu()
             avaliarUmaBanda();
             break;
         case 4:
-            Console.WriteLine("Você escolheu a opção " + opcaoEscolhidaNumerica);
+            ExibirMedia();
             break;
         case -1:
             Console.WriteLine("Tchau tchau :)");
@@ -109,7 +109,7 @@ void avaliarUmaBanda()
     Console.Clear();
     ExibirTitulosDasOpcoes("Avaliar Banda");
     Console.Write("Digite o nome da banda: ");
-    string bandaEscolhida =Console.ReadLine()!;
+    string bandaEscolhida = Console.ReadLine()!;
     if (bandasRegistradas.ContainsKey(bandaEscolhida))
     {
         Console.WriteLine($"Qual nota deseja aplicar para a banda {bandaEscolhida}?");
@@ -129,4 +129,28 @@ void avaliarUmaBanda()
     }
 }
 
-    ExibirOpcoesDoMenu();
+void ExibirMedia()
+{
+    Console.Clear();
+    ExibirTitulosDasOpcoes("Avaliar Banda");
+    Console.Write("Digite o nome da banda: ");
+    string nomeDaBanda = Console.ReadLine()!;
+    if (bandasRegistradas.ContainsKey(nomeDaBanda))
+    {
+        List<int> notasDasBandas = bandasRegistradas [nomeDaBanda];
+        Console.WriteLine($"A média da banda {nomeDaBanda} é: {notasDasBandas.Average()}.");
+        Console.WriteLine("Digite qualquer tecla para retornar ao menu principal...");
+        Console.ReadKey();
+        Console.Clear();
+        ExibirOpcoesDoMenu();
+    }
+    else
+    {
+        Console.WriteLine($"\nA banda {nomeDaBanda} não foi localizada.");
+        Console.WriteLine("Digite qualquer tecla para voltar");
+        Console.ReadKey();
+        ExibirOpcoesDoMenu();
+    }
+}
+
+ExibirOpcoesDoMenu();
